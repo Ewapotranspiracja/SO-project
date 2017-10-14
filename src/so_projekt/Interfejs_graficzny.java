@@ -44,7 +44,7 @@ public class Interfejs_graficzny extends JFrame {
                 okno.setVisible(true);
             }
         });
-        JButton Modul3 = new JButton("Modul nr 3");
+        JButton Modul3 = new JButton("shell");
         Modul3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
