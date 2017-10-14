@@ -33,7 +33,7 @@ public class Interfejs_graficzny extends JFrame {
             }
         });
 
-        JButton Modul2 = new JButton("Modul nr 2");
+        JButton Modul2 = new JButton("zarzadzenie procesorem");
         Modul2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
