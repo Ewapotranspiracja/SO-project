@@ -1,0 +1,138 @@
+
+package so_projekt;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.HashMap;
+/**
+ *
+ * @author Dziembakowska
+ */
+
+
+public class Shell {
+    
+    int count(String file) throws FileNotFoundException{      ////Zwraca liczbę znaczkow w programie
+            File fileS = new File(file);
+            Scanner in = new Scanner(fileS);  
+             int lines = 0;
+                 int chars = 0;
+                 while(in.hasNextLine())  { 
+                      lines++;
+                      String line = in.nextLine();  
+                       chars += line.length();                     
+    }
+                 chars+=lines;
+                   return chars;}
+    
+    void Separate(String line){ ///////////Rozdzielanie
+    if(line.length()>2){
+    Command =line.substring(0,2);
+    Parameter = line.substring(3,line.length());
+    Parameters = Parameter.split(" ");  
+//    for ( String ss : Parameters) {
+//       System.out.println(ss);
+//    }
+    } else{
+    if (line.length()<3){
+        Command=line;
+        Parameters=null;
+    }
+    }
+    } /////end rozdzielania
+    
+      boolean isAllowed(){ ///////Czy dane sa podane prawidlowo
+      if (!Commands.containsKey(Command)) return false;
+      if (Commands.get(Command)==0 && Parameters==null) return true;
+      if (Commands.get(Command)==0 && Parameters!=null) return false;
+      if (Parameters.length!=Commands.get(Command)) return false;
+      return true;
+      }
+    
+        String Command;
+        String Parameter;
+        String[] Parameters;  ///maksymalnie 3 parametry
+         private  HashMap<String, Integer> Commands;
+          File fileScript;
+	 public Shell () throws InterruptedException, FileNotFoundException, IOException {
+             
+             Commands = new HashMap<>(); ///tworzymy liste zawierajaca komendy oraz liczbe parametrow
+             Commands.put("CP",3); ///Utworz proces
+             Commands.put("DP",1); ///Usuń proces
+             Commands.put("BC",1); ///Pokaż blok procesu
+             Commands.put("GO",0); ///Wykonaj rozkaz
+             Commands.put("MC",2); ///Pokaz pamiec
+             Commands.put("MF",2); ///Utworz plik
+             Commands.put("SF",1); ///Wyswietl plik
+             Commands.put("DF",1); ///Usuń plik
+             Commands.put("EF",1); ///Edytuj plik
+             Commands.put("SC",0); ///Wyswietl tablice Fat
+             Commands.put("CC",3); ///Przypisz komunikat do procesu
+             Commands.put("EX",0); ///Zamknij system
+             
+             
+             ////////////////////Ekran powitalny jakies pierdopierdu podaj nazwe pliku ze skryptem
+             
+            Scanner console = new Scanner(System.in);           
+            do {
+            System.out.println("Prosze podac plik ze skryptem.");
+            String inputScript = console.next();
+            fileScript = new File(inputScript);
+            }while(!fileScript.exists()||fileScript.isDirectory());
+            Scanner in = new Scanner(fileScript);  ///////////Zawartosc pliku ze skryptami
+
+            
+                 while(in.hasNextLine())  {  ////Dopoki plik nie jest pusty
+                      
+                      String line = in.nextLine();   ////////Wczytujemy polecenie
+                     /// line = line.toLowerCase(); ///////wszystko malymi literami
+                           
+                      Separate(line);
+                      System.out.println(isAllowed());
+                      
+                       ///////////IsAllowed - czy komenda jest poprawna
+                       ///////////Jak nie jest to obslugujemy (prosimy o podanie jeszcze raz line ew czy skipnac?
+                       
+                       switch(Command){             ///osługa komendy
+                           case "CP" : { ///Utworz proces
+                               break;}
+                           case "DP" : { ///Usuń proces
+                               break;}
+                           case "BC" : { ///Pokaż blok procesu
+                               break;}
+                           case "GO" : { ///Wykonaj rozkaz
+                               break;}
+                           case "MC" : { ///Pokaz pamiec
+                               break;}
+                           case "MF" : { ///Utworz plik
+                               break;}
+                           case "SF" : { ///Wyswietl plik
+                               break;}
+                           case "DF" : { ///Usuń plik
+                               break;}
+                           case "EF" : { ///Edytuj plik
+                               break;}
+                           case "SC" : { ///Wyswietl tablice Fat
+                               break;}
+                           case "CC" : { ///Przypisz komunikat do procesu
+                               break;}
+                           
+                           case "EX" : { ///Zamknij system
+                               System.out.println("Dziekujemy za skorzystanie z systemu!");
+                               System.out.println("Do widzenia!");
+                               System.in.read();
+                               System.exit(0); }
+                       }
+                       System.in.read(); ////pauza po obsłużeniu
+    }
+                 
+                 System.out.println("Dziekujemy za skorzystanie z systemu!");
+                 
+                 System.in.read();
+         }
+
+   
+}
+                
+	
